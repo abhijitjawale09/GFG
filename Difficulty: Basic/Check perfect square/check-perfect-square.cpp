@@ -1,34 +1,30 @@
 //{ Driver Code Starts
-#include<bits/stdc++.h> 
-using namespace std; 
+// Initial Template for C++
+#include <bits/stdc++.h>
+using namespace std;
 
 // } Driver Code Ends
-class Solution{   
-public:
-    int checkPerfectSquare(int N){
-        // code here 
-        for(int i = 2;i <= sqrt(N); i++){
-            if(N%i ==0   && N == i*i) {
-                return 1;
-                
-            }
-        }
-        return 0;
+// User function Template for C++
+class Solution {
+  public:
+    long long int isPerfectSquare(long long int n){
+        // code here
+        long long num=sqrt(n);
+        return num*num==n?1:0;
     }
 };
 
 //{ Driver Code Starts.
-int main() 
-{ 
+int main() {
     int t;
-    cin>>t;
-    while(t--)
-    {
-        int N;
-        cin >> N;
+    cin >> t;
+    while (t--) {
+        long long int n;
+        cin >> n;
         Solution ob;
-        cout << ob.checkPerfectSquare(N) << endl;
+        cout << ob.isPerfectSquare(n) << endl;
     }
-    return 0; 
-} 
+    return 0;
+}
+
 // } Driver Code Ends
