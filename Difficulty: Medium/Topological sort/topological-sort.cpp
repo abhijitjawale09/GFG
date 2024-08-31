@@ -7,37 +7,38 @@ class Solution
 {
 	public:
 	//Function to return list containing vertices in Topological order. 
-	void DFS(vector<int> adj[] , int u , vector<bool> &visited , stack<int> &st){
-        visited[u] = true;
-        
-        for(int &v : adj[u] ) {
-            if(!visited[v]) {
-                DFS(adj , v , visited , st);
-            }
-        }
-        
-        st.push(u);
-	}
-	
-	
 	vector<int> topoSort(int V, vector<int> adj[]) 
 	{
 	    // code here
-	    vector<bool> visited(V ,false);
-	    stack<int> st;
-	    for(int i = 0; i < V; i++) {
-	         if(!visited[i]) {
-	             DFS(adj ,i,  visited , st );
-	         }
+	    vector<int> indegree(V , 0);
+	    queue<int> que;
+	    for(int u = 0; u < V; u++) {
+	        for(int &v : adj[u]) {
+	            indegree[v]++;
+	        }
 	    }
 	    
-	   vector<int> result;
-	   
-	   while(!st.empty()) {
-	       int p = st.top();
-	       result.push_back(p);
-	       st.pop();
-	   }
+	    for(int i = 0; i < V; i++) {
+	        if(indegree[i] == 0) {
+	            que.push(i);
+	        }
+	    }
+	    
+	    
+	    vector<int> result;
+	    while(!que.empty()) {
+	        int u = que.front();
+	        que.pop();
+	        result.push_back(u);
+	        
+	        for(int &v : adj[u]) {
+	            indegree[v]--;
+	            
+	            if(indegree[v] == 0) {
+	                que.push(v);
+	            }
+	        }
+	    }
 	    return result;
 	}
 };
