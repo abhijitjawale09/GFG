@@ -1,49 +1,48 @@
 //{ Driver Code Starts
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 
 // } Driver Code Ends
 // Function to return minimum number of jumps to end of array
 
-class Solution{
+class Solution {
   public:
-        static int minJumps(int arr[], int n) {
-        
-        if (n<=1) return 0;
-        if (arr[0] == 0) return -1;
-        int step=0;
-        int jump=0;
-        int nextmove=0;
-        
-        for(int i=0;i<n;i++){
-            nextmove=max(nextmove,i+arr[i]);
-            if(i==step){
-               jump++;
-                step=nextmove;
-                if(step>=n-1) return jump;
-            }
-        }
-        return -1;
+    int minJumps(vector<int>& arr) {
+        // Your code here
+         
+         int n = arr.size(), maxInd = 0, nextMaxInd = arr[0], res = 0;
+        for ( int i = 0; i<n-1; i++ ){
+            if ( maxInd == i ){
+                maxInd = max(nextMaxInd, i+arr[i]);
+                nextMaxInd = 0;
+                res++;
+            } else nextMaxInd = max(nextMaxInd, i+arr[i]);
+        } return (maxInd >= n-1) ? res : -1;
+    
     }
 };
 
 
 //{ Driver Code Starts.
 
-int main()
-{
+int main() {
     int t;
-    cin>>t;
-    while(t--)
-    {
-        int n,i,j;
-        cin>>n;
-        int arr[n];
-        for(int i=0; i<n; i++)
-            cin>>arr[i];
+    cin >> t;
+    cin.ignore();
+    while (t--) {
+        int n, i, j;
+        vector<int> arr;
+        string ip;
+        int number;
+        getline(cin, ip);
+        stringstream ss(ip);
+
+        while (ss >> number) {
+            arr.push_back(number);
+        }
         Solution obj;
-        cout<<obj.minJumps(arr, n)<<endl;
+        cout << obj.minJumps(arr) << endl;
     }
     return 0;
 }
