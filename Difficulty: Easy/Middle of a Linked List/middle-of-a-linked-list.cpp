@@ -28,7 +28,7 @@ void printList(Node* node) {
 
 // } Driver Code Ends
 /* Link list Node
-struct Node {
+struct Node { 
     int data;
     Node* next;
 
@@ -43,18 +43,17 @@ class Solution {
     /* Should return data of middle node. If linked list is empty, then -1 */
     int getMiddle(Node* head) {
         // code here
-        if(head == NULL) {
-            return -1;
-        }
         Node* slow = head;
         Node* fast = head;
-
-        
-        while(fast != NULL && fast->next != NULL) {
+        while(fast) {
+            if(fast->next == NULL) break;
+            if(fast->next == NULL){ 
+                slow = slow->next;
+                break;
+            }
             slow = slow->next;
             fast = fast->next->next;
-            
-        } 
+        }
         return slow->data;
     }
 };
