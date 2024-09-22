@@ -10,21 +10,21 @@ class Solution {
   public:
     // Function returns the second
     // largest elements
-    int print2largest(vector<int> &arr) {
-        // Code Here
-        int n = arr.size();
-        int max1 = INT_MIN;
-        int max2 = INT_MIN;
-        for(int i = 0; i < n ; i++) {
-            if(arr[i] > max1){
-                max2 = max1;
-                max1 = arr[i];
-            }else if(arr[i] < max1 && arr[i] > max2){
-                max2 = arr[i];
+   int print2largest(vector<int> &arr) {
+        int largest  = arr[0];
+        int slargest = -1;
+        for(int i=1;i<arr.size();i++){
+            if(arr[i]>largest){
+                slargest = largest;
+                largest = arr[i];
+            }
+            else if(arr[i]<largest && arr[i]>slargest){
+                slargest = arr[i];
             }
         }
+        return slargest;
         
-        return (max2 == INT_MIN) ? -1 : max2;
+    
     }
 };
 
