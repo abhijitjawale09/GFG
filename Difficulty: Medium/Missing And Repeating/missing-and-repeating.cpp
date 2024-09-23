@@ -3,27 +3,48 @@
 
 using namespace std;
 
+
 // } Driver Code Ends
-class Solution{
-public:
-    vector<int> findTwoElement(vector<int> arr, int n) {
-        // code here
-        vector<int> v(2 , -1);
-        unordered_map<int , int> mp;
-        for(int i = 0 ; i < n; i++) {
-            mp[arr[i]]++;
-        }
-        
-        for(int  i = 1; i <= n ; i++) {
-            if(mp[i] == 2) {
-                v[0] = i;
+class Solution {
+  public:
+    vector<int> findTwoElement(vector<int>& arr) {
+        // code here4
+       int n = arr.size();
+                int xr = 0;
+                for (int i = 0; i < n; i++) {
+                    xr ^= arr[i];
+                    xr ^= (i + 1);
+                }
+                int setBit = xr & -xr;
+            
+                int x = 0, y = 0; 
+                for (int i = 0; i < n; i++) {
+                    if (arr[i] & setBit) {
+                        x ^= arr[i]; 
+                    } else {
+                        y ^= arr[i]; 
+                    }
+                }
+            
+                for (int i = 1; i <= n; i++) {
+                    if (i & setBit) {
+                        x ^= i; 
+                    } else {
+                        y ^= i;
+                    }
+                }
+            
+                int countX = 0;
+                for (int num : arr) {
+                    if (num == x) countX++;
+                }
+            
+                if (countX == 2) {
+                    return {x, y}; 
+                } else {
+                    return {y, x}; 
                 
-            }
-            if(mp[i] == 0) {
-                v[1] = i;
-            }
-        }
-        return v;
+                }
     }
 };
 
@@ -40,7 +61,7 @@ int main() {
             cin >> a[i];
         }
         Solution ob;
-        auto ans = ob.findTwoElement(a, n);
+        auto ans = ob.findTwoElement(a);
         cout << ans[0] << " " << ans[1] << "\n";
     }
     return 0;
