@@ -9,9 +9,29 @@ class Solution {
     int search(vector<int>& arr, int key) {
         // complete the function here
         int n = arr.size();
-        for(int i = 0; i <n ; i++) {
-            if(arr[i] == key) {
-                return i;
+
+        int start = 0 , end = n -1;
+
+        while(start <= end) {
+            int mid = start + (end - start) / 2;
+            
+            if(arr[mid] == key) {
+                return mid;
+            }
+            
+            if(arr[mid] >= arr[start]) {
+                if(key >= arr[start] && key < arr[mid]){
+                    end = mid - 1;
+                
+                }else {
+                    start = mid + 1;
+                }
+            }else {
+                if(key > arr[mid]  && key <= arr[end]) {
+                    start = mid + 1;
+                }else {
+                    end = mid - 1;
+                }
             }
         }
         return -1;
@@ -36,6 +56,7 @@ int main() {
         cin >> key;
         Solution ob;
         cout << ob.search(arr, key) << endl;
+        cout << "~" << endl;
     }
     return 0;
 }
