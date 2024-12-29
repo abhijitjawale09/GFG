@@ -14,7 +14,7 @@ class Solution {
         vector<vector<int>> ans;
         int n = arr.size();
         for (int i = 0; i < n - 2; i++) {
-            unordered_map<int, vector<int>> mp;
+              unordered_map<int, vector<int>> mp;
             int sum = arr[i];
             for (int j = i + 1; j < n; j++) {
                 int op = sum + arr[j];
