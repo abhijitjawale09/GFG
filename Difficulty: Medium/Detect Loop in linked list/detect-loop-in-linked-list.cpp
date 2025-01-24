@@ -42,18 +42,25 @@ class Solution {
   public:
     // Function to check if the linked list has a loop.
     bool detectLoop(Node* head) {
-        // your code here
-        Node* temp = head;
-        int count = 0;
-        while(temp != NULL && count < 100001) {
-            count++;
-            temp= temp->next;
+        // your code hereNode* slow 
+         if (head == NULL) return false; 
+         
+         
+        Node* slow = head;
+        Node* fast = head;
+        
+        while(fast && fast->next) {
+        
+            slow = slow->next;
+            fast = fast->next->next;
+            
+            if(slow == fast) {
+                return true;
+            }
+    
+            
         }
-        if(temp == NULL) {
-            return false;
-        }else {
-            return true;
-        }
+        return false;
     }
 };
 
