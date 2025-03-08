@@ -1,13 +1,15 @@
 //{ Driver Code Starts
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 
 // } Driver Code Ends
+
 class Solution {
   public:
-   string longestPalin (string S) {
-    int start = 0, end = 0;
+    string longestPalindrome(string &S) {
+        // code here
+        int start = 0, end = 0;
     int low,high;
     for(int i = 0; i < S.length(); i++){
         // odd part
@@ -38,22 +40,25 @@ class Solution {
     }
     if(end == 0)return S.substr(start,1); // no pallindrome at all
     return S.substr(start,end);
-   }
+    }
 };
+
 
 //{ Driver Code Starts.
 
-int main()
-{
-    int t; cin >> t;
-    while (t--)
-    {
-        string S; cin >> S;
-        
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        string S;
+        cin >> S;
+
         Solution ob;
-        cout << ob.longestPalin (S) << endl;
+        cout << ob.longestPalindrome(S) << endl;
+
+        cout << "~"
+             << "\n";
     }
 }
-// Contributed By: Pranay Bansal
 
 // } Driver Code Ends
