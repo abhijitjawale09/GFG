@@ -7,30 +7,43 @@ using namespace std;
 
 class Solution {
   public:
-   int t[46];
-    int solve(int n) {
-        if(n == 0) {
-            return 0;
-        }
-        if(n == 1 || n == 2) {
-            return n;
-        }
-        
-        if(t[n] != -1 ) {
-            return t[n];
-        }
-        return t[n] = solve(n-1)+ solve(n-2);
-
-    
-    }
     int countWays(int n) {
         // your code here
-        memset(t , -1 , sizeof(t));
-        return solve(n);
+        if(n<=2)return n;
+        int a = 1 , b = 2;
+        
+        for(int i = 3; i <= n; i++) {
+            int c= a + b;
+            a= b;
+            b = c;
+            
+        }
+        return b;
+        
     }
 };
 
+//   int t[46];
+//     int solve(int n) {
+//         if(n == 0) {
+//             return 0;
+//         }
+//         if(n == 1 || n == 2) {
+//             return n;
+//         }
+        
+//         if(t[n] != -1 ) {
+//             return t[n];
+//         }
+//         return t[n] = solve(n-1)+ solve(n-2);
 
+    
+//     }
+//     int countWays(int n) {
+//         // your code here
+//         memset(t , -1 , sizeof(t));
+//         return solve(n);
+//     }
 
 //{ Driver Code Starts.
 int main() {
