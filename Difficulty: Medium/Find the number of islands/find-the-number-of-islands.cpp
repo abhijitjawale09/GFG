@@ -2,43 +2,49 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
 // } Driver Code Ends
+
 class Solution {
   public:
-    // Function to find the number of islands.
-    void dfs(vector<vector<char>> &grid , int i , int j)  {
-         int n = grid.size();
-        int m = grid[0].size();
-        if(i<0|| j<0|| i>=n|| j>=m) return;
-        if(grid[i][j] != '1') return;
-        grid[i][j] = '2';
-        dfs(grid , i +1 , j);
-        dfs(grid , i , j +1 );
-        dfs(grid , i + 1 , j + 1);
-        dfs(grid , i -1  , j);
-        dfs(grid , i , j - 1);
-        dfs(grid , i - 1 , j - 1);
-        dfs(grid , i + 1 , j -1);
-        dfs(grid , i - 1 , j + 1);
-        
-    }
-    int numIslands(vector<vector<char>>& grid) {
-        // Code here
+   int countIslands(vector<vector<char>>& grid) {
+        int dx[8] = {0, 0, 1, -1, 1, 1, -1, -1};
+        int dy[8] = {1, -1, 0, 0, -1, 1, -1, 1};
         int n = grid.size();
         int m = grid[0].size();
-        int count = 0;
-        
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                if(grid[i][j] == '1') {
-                    dfs(grid , i , j);
-                    count++;
+        int ans = 0;
+        for(int i= 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                
+                if(grid[i][j] == 'L'){
+                    queue<pair<int,int>>q; 
+                    q.push({i, j});
+                
+                    grid[i][j] = 'W';
+                    ans += 1;
+                
+                    while(!q.empty()){
+                        auto f = q.front();
+                        q.pop();
+                    
+                        for(int k = 0; k < 8; k++){
+                            int nx = f.first + dx[k];
+                            int ny = f.second + dy[k];
+                        
+                            if(nx >= 0 && nx < n && ny >= 0 && ny < m && grid[nx][ny] == 'L'){
+                                q.push({nx, ny});
+                                grid[nx][ny] = 'W';
+                            }
+                        }
+                    }
                 }
             }
         }
-        return count;
+        return ans;
+        
     }
 };
+
 
 //{ Driver Code Starts.
 int main() {
@@ -54,8 +60,11 @@ int main() {
             }
         }
         Solution obj;
-        int ans = obj.numIslands(grid);
+        int ans = obj.countIslands(grid);
         cout << ans << '\n';
+
+        cout << "~"
+             << "\n";
     }
     return 0;
 }
