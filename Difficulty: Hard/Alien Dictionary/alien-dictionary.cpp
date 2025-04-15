@@ -9,7 +9,7 @@ class Solution {
   public:
     string findOrder(vector<string> &words) {
         // code here
-         int n = words.size();
+        int n = words.size();
         map<char,vector<char>> adj;
         vector<bool> freq1(26,0),freq2(26,0);
         vector<int> inDegree(26,0);
