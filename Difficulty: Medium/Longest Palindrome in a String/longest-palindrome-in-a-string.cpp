@@ -1,64 +1,23 @@
-//{ Driver Code Starts
-#include <bits/stdc++.h>
-using namespace std;
-
-
-// } Driver Code Ends
-
 class Solution {
   public:
-    string longestPalindrome(string &S) {
+    string longestPalindrome(string &s) {
         // code here
-        int start = 0, end = 0;
-    int low,high;
-    for(int i = 0; i < S.length(); i++){
-        // odd part
-         low = i - 1;
-         high = i;
-        while(low>=0 && high<S.length() && S[low] == S[high]){
-            
-            if(high - low + 1 > end){
-                end = high - low + 1; //current longest pallindrome length
-                start = low;
-            }
-            low--;
-            high++;
-        }
-        // Even part
-         low = i - 1;
-         high = i + 1;
-        while(low>=0 && high<S.length() && S[low] == S[high]){
-            
-            if(high - low + 1 > end){
-                end = high - low + 1; //current longest pallindrome length
-                start = low;
-            }
-            low--;
-            high++;
-        }
+        int n = s.size();
         
-    }
-    if(end == 0)return S.substr(start,1); // no pallindrome at all
-    return S.substr(start,end);
+        int start = 0 , maxlen = 0;
+        for(int i = 0; i < n; i++) {
+            for(int k : {i , i + 1}) {
+                int j = i , l = k;
+                while(j >= 0 &&  l < n && s[j] == s[l]) {
+                    j--;
+                    l++;
+                }
+                if(l - j -1 > maxlen) {
+                    maxlen = l - j -1;
+                    start = j + 1;
+                }
+            }
+        }
+        return s.substr(start, maxlen);
     }
 };
-
-
-//{ Driver Code Starts.
-
-int main() {
-    int t;
-    cin >> t;
-    while (t--) {
-        string S;
-        cin >> S;
-
-        Solution ob;
-        cout << ob.longestPalindrome(S) << endl;
-
-        cout << "~"
-             << "\n";
-    }
-}
-
-// } Driver Code Ends
